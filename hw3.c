@@ -62,11 +62,13 @@ void forkChild(char *args[], int n){
     int pid = fork();
     char *word;
     int i;
+    
     int flag = 0;
+    
     if(pid == 0){
         for(i = 0; i < n; i++){
             if(strncmp(args[i], ";", 2) == 0){
-                
+                flag = 1;
                 twoArgsHandler(args,i);
 //                int argsLength = sizeof(args) / sizeof(char*);
 //                char* firstArgs[i+1];
@@ -87,7 +89,7 @@ void forkChild(char *args[], int n){
                 
                 break;
             }else if(strncmp(args[i], ">", 1) == 0){
-                flag = 1;
+                
                 
                 redirectOutputHandler(args,i,fd);
 //                args[i] = (char *) 0;
@@ -98,7 +100,7 @@ void forkChild(char *args[], int n){
                 
                 break;
             }else if(strncmp(args[i], "<", 1) == 0){
-                flag = 1;
+                
                 redirectInputHandler(args,i,fd);
                 
 //                args[i] = (char *) 0;
@@ -110,7 +112,7 @@ void forkChild(char *args[], int n){
             }
         }
         
-        if(flag){
+        if(flag == 0){
             execvp(args[0], args);
         }
         
