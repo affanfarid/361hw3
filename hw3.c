@@ -89,23 +89,23 @@ void forkChild(char *args[], int n){
             }else if(strncmp(args[i], ">", 1) == 0){
                 flag = 1;
                 
-                //redirectOutputHandler(args,i,fd);
-                args[i] = (char *) 0;
-                fd = open(args[i + 1], O_RDWR|O_CREAT, S_IWUSR|S_IRGRP| S_IROTH);
-                dup2(fd, 1);
-                close(fd);
-                execvp(args[0], args);
+                redirectOutputHandler(args,i,fd);
+//                args[i] = (char *) 0;
+//                fd = open(args[i + 1], O_RDWR|O_CREAT, S_IWUSR|S_IRGRP| S_IROTH);
+//                dup2(fd, 1);
+//                close(fd);
+//                execvp(args[0], args);
                 
                 break;
             }else if(strncmp(args[i], "<", 1) == 0){
                 flag = 1;
-                //redirectInputHandler(args,i,fd);
+                redirectInputHandler(args,i,fd);
                 
-                args[i] = (char *) 0;
-                fd = open(args[i+1], O_RDONLY);
-                dup2(fd, 0);
-                close(fd);
-                execvp(args[0], args);
+//                args[i] = (char *) 0;
+//                fd = open(args[i+1], O_RDONLY);
+//                dup2(fd, 0);
+//                close(fd);
+//                execvp(args[0], args);
                 break;
             }
         }
