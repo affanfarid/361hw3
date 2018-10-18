@@ -114,7 +114,7 @@ void forkChild(char *args[], int n){
     }else{
         wait(&status);
         printf("pid:%d", pid);
-        printf(" status:%d\n", WEXITSTATUS(&status));
+        printf(" status:%d\n", WEXITSTATUS(status));
         
         //printf("exit: %d\n", status);
         //printf("exit: %d\n", WEXITSTATUS(status));
