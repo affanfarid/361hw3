@@ -70,44 +70,22 @@ void forkChild(char *args[], int n){
             if(strncmp(args[i], ";", 2) == 0){
                 flag = 1;
                 twoArgsHandler(args,i);
-//                int argsLength = sizeof(args) / sizeof(char*);
-//                char* firstArgs[i+1];
-//                char* secondArgs[argsLength - i];
-//
-//                firstArgs[i] = "/0";
-//                for(int j = 0; j < i; j++){
-//                    firstArgs[j] = args[j];
-//                }
-//
-//                for(int k = i+1; k< argsLength; k++){
-//                    secondArgs[k-(i+1)] = args[k];
-//                }
-//                //create new array
-//
-//                execvp(firstArgs[0],firstArgs);
-//                execvp(secondArgs[0],secondArgs);
+
                 
                 break;
             }else if(strncmp(args[i], ">", 1) == 0){
                 
                 
                 redirectOutputHandler(args,i,fd);
-//                args[i] = (char *) 0;
-//                fd = open(args[i + 1], O_RDWR|O_CREAT, S_IWUSR|S_IRGRP| S_IROTH);
-//                dup2(fd, 1);
-//                close(fd);
-//                execvp(args[0], args);
+
                 
                 break;
             }else if(strncmp(args[i], "<", 1) == 0){
                 
                 redirectInputHandler(args,i,fd);
                 
-//                args[i] = (char *) 0;
-//                fd = open(args[i+1], O_RDONLY);
-//                dup2(fd, 0);
-//                close(fd);
-//                execvp(args[0], args);
+// comment
+
                 break;
             }
         }
@@ -122,18 +100,10 @@ void forkChild(char *args[], int n){
         wait(&status);
         printf("pid:%d", pid);
         printf(" status:%d\n", WEXITSTATUS(status));
-        
-        //printf("exit: %d\n", status);
-        //printf("exit: %d\n", WEXITSTATUS(status));
+
     }
 }
-//void freeStuff(char **arr, int n){
-//    int i;
-//    for(i = 0; i < n; i++){
-//        free(arr[i]);
-//    }
-//    free(arr);
-//}
+
 int main(int argc, char **argv) {
     while (1) {
         
@@ -158,7 +128,7 @@ int main(int argc, char **argv) {
         args[i] = (char *) malloc(sizeof(char* )* 100);
         args[i] = (char *)0;
         forkChild(args, i);
-        //freeStuff(args, i);
+
     }
     return 0;
 }
