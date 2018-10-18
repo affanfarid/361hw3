@@ -32,7 +32,7 @@ void redirectOutputHandler(char *args[], int i, int fd){
     fd = open(args[i + 1], O_RDWR|O_CREAT, S_IWUSR|S_IRGRP| S_IROTH);
     dup2(fd, 1);
     close(fd);
-    execvp(args[0], args);
+    //execvp(args[0], args);
 
 }
 
@@ -41,7 +41,7 @@ void redirectInputHandler(char *args[], int i, int fd){
     fd = open(args[i+1], O_RDONLY);
     dup2(fd, 0);
     close(fd);
-    execvp(args[0], args);
+    //execvp(args[0], args);
 }
 
 
@@ -109,6 +109,11 @@ void forkChild(char *args[], int n){
                 break;
             }
         }
+        
+        if(flag){
+            execvp(args[0], args);
+        }
+        
         
         exit(0);
     }else{
