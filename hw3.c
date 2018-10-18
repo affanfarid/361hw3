@@ -90,43 +90,27 @@ void forkChild(char *args[], int n){
                 flag = 1;
                 
                 //redirectOutputHandler(args,i,fd);
-                
-//                args[i] = (char *) 0;
-//                fd = open(args[i + 1], O_RDWR|O_CREAT, S_IWUSR|S_IRGRP| S_IROTH);
-//                dup2(fd, 1);
-//                close(fd);
-//                execvp(args[0], args);
-                
-                args[l] = (char*) 0;
-                fd = open(args[l+1], O_RDWR|O_CREAT, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
-                dup2(fd,1);
+                args[i] = (char *) 0;
+                fd = open(args[i + 1], O_RDWR|O_CREAT, S_IWUSR|S_IRGRP| S_IROTH);
+                dup2(fd, 1);
                 close(fd);
-                
+                execvp(args[0], args);
                 
                 break;
             }else if(strncmp(args[i], "<", 1) == 0){
                 flag = 1;
                 //redirectInputHandler(args,i,fd);
                 
-                args[l] = (char*) 0;
-                fd = open(args[l+1], O_RDONLY);
-                dup2(fd,0);
+                args[i] = (char *) 0;
+                fd = open(args[i+1], O_RDONLY);
+                dup2(fd, 0);
                 close(fd);
+                execvp(args[0], args);
                 break;
-//
-//                args[i] = (char *) 0;
-//                fd = open(args[i+1], O_RDONLY);
-//                dup2(fd, 0);
-//                close(fd);
-//                execvp(args[0], args);
-//
-//                break;
             }
         }
         
-        execvp(args[0], args); //might delete
         exit(0);
-        
     }else{
         wait(&status);
         printf("pid:%d", pid);
