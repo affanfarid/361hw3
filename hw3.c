@@ -55,7 +55,6 @@ void sigtstp_handler(int sig){
     write(1, "caught signal: sigstp\nCS361 >", sizeof("caught signal: sigstp\nCS361 >"));
     //exit(0);
     return;
-    //comment
 }
 void forkChild(char *args[], int n){
     int status;
